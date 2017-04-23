@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>SVG to JSON and JSON to SVG converter</title>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+  <body>
+    <div class="row">
+      <div class="navbar-fixed">
+        <nav>
+          <div class="nav-wrapper">
+            <h4 class="header">SVG to JSON and JSON to SVG converter</h4>
+          </div>
+        </nav>
+      </div>
+
+      <div class="col s5 center-align">
+         <div class="marginTop">Raw SVG</div>
+        <textarea class="textarea" id="svgText"><svg height="210" width="400">
+        <path d="M150 0 L75 200 L225 200 Z"/>
+        </svg>
+        </textarea>
+      </div>
+      <div class="col s2 center-align">
+        <div class="btnWrp">
+          <button id="tojson" class="btn waves-effect waves-light red lighten-3 button">svg to json</button>
+          <button id="tosvg" class="btn waves-effect waves-light red lighten-3 button marginBtn">json to svg</button>
+        </div>
+      </div>
+      <div class="col s5 center-align">
+        <div class="marginTop">JSON formated SVG</div>
+        <textarea class="textarea" id="jsonText"></textarea>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/ObjTree.js"></script>
+  <script type="text/javascript">
+    $( "#tojson" ).click(function() {
+      var xotree = new XML.ObjTree();
+      var json = eval("(" + $("#jsonText").val() + ")");
+      $("textarea#svgText").val(formatXml(xotree.writeXML(json)));
+    });
+    $( "#tosvg" ).click(function() {
+      var xotree = new XML.ObjTree();
+      var dumper = new JKL.Dumper(); 
+      var tree = xotree.parseXML($("#svgText").val());
+      $("textarea#jsonText").val(dumper.dump(tree));
+    });
+  </script>
+</html>
