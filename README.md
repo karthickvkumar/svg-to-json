@@ -1,5 +1,3 @@
-# svg-to-json
-
 # SVG to Javascript object
 
 ## What is it
