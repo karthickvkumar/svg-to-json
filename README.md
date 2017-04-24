@@ -1,4 +1,4 @@
-# SVG to Javascript object
+# SVG to Javascript object (JSON)
 
 ## What is it
 
